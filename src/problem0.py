@@ -8,8 +8,8 @@ These problems illustrate concepts that previous problems have not emphasized:
   -- animation (Problem 0c)
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Colleen Fulton.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -145,8 +145,11 @@ def problem0a(n):
       -- If the given integer is 246, this function returns False,
            since (2 + 4 + 6) is 12, which is NOT odd.
     """
+
+    return (sum_of_digits(n) % 2 == 1)
+
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ####################################################################
@@ -227,6 +230,12 @@ def problem0b(n):
     #    **  use (call) the   is_prime   function that is DEFINED ABOVE.
     ####################################################################
     # ------------------------------------------------------------------
+    total = 0
+    for k in range(n-1):
+        if is_prime(k+2) % 2 == 1:
+            total = total + 1
+            # has to remember that the variable being referenced is k, not n.
+    return total
 
 
 def run_test_problem0c():
@@ -285,8 +294,20 @@ def problem0c(circle, n, window):
       :type n: int
       :type window: rg.RoseWindow
     """
+    window = rg.RoseWindow
+
+    circle.attach_to(window)
+    radius = circle.radius
+    center = rg.Point(circle.center.x+(2*radius), circle.center.y)
+    for k in range(n):
+        circle = rg.Circle(center, radius)
+        circle.attach_to(window)
+
+        center = rg.Point(center.x+(2*radius, center.y))
+    window.render()
+
     # ------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # Done: 4. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ####################################################################
