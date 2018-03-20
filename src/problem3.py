@@ -2,8 +2,8 @@
 PRACTICE Test 1, problem 3.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Colleen Fulton.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -30,14 +30,14 @@ import rosegraphics as rg
 
 def main():
     """ Calls the   TEST   functions in this module. """
-    run_test_problem3a()
+    #run_test_problem3a()
     run_test_problem3b()
 
 
 def run_test_problem3a():
     """ Tests the   problem3a   function. """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement this TEST function.
+    # DONE: 2. Implement this TEST function.
     #   It TESTS the  problem1a  function defined below.
     #   Include at least **   5   ** tests (we wrote four for you).
     # ------------------------------------------------------------------
@@ -95,13 +95,21 @@ def run_test_problem3a():
     print('Test 4 expected:', expected)
     print('       actual:  ', answer)
 
-    window3.close_on_mouse_click()
 
     # ------------------------------------------------------------------
     # TO DO: 2 (continued).
     # Below this comment (or integrated with one of the above tests,
     # your choice), add 1 more test case of your own choosing.
     # ------------------------------------------------------------------
+    #Test 5 (it is on window 3):
+    point = rg.Point(100, 200)
+    expected = 16
+    answer = problem3a(window3, point, 4)
+    print()
+    print('Test 5 expected:', expected)
+    print('         actual:', answer)
+
+    window3.close_on_mouse_click()
 
 
 def problem3a(window, point, n):
@@ -137,7 +145,7 @@ def problem3a(window, point, n):
         :type n:      int
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # ------------------------------------------------------------------
     # ------------------------------------------------------------------
@@ -146,6 +154,21 @@ def problem3a(window, point, n):
     #    TIME ESTIMATE:   20 to 35 minutes.
     # ------------------------------------------------------------------
 
+    count_thickness = 1
+    count = 0
+    for _ in range(n):
+        line = rg.Line(rg.Point(point.x, point.y), rg.Point(point.x, point.y + 50))
+        line.thickness = count_thickness
+        if line.thickness < 11:
+            count_thickness = line.thickness + 2
+        else:
+            count_thickness = 13
+        point.x = point.x + 20
+        point.y = point.y + 10
+        count = count + line.thickness
+        line.attach_to(window)
+    window.render()
+    return count
 
 def run_test_problem3b():
     """ Tests the   problem3b   function. """
@@ -201,7 +224,7 @@ def problem3b(m, point1):
         :type point1: rg.Point
     """
     # ------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ####################################################################
@@ -214,6 +237,23 @@ def problem3b(m, point1):
     #    DIFFICULTY:      8 or 9
     #    TIME ESTIMATE:   20 to 30 minutes.
     # ------------------------------------------------------------------
+
+    window = rg.RoseWindow(400, 650)
+    # set1 = problem3a(window, point1, 3)
+    # set2 = problem3a(window, rg.Point(point1.x, point1.y + 60), 5)
+    # set3 = problem3a(window, rg.Point(point1.x, point1.y + 120), 7)
+    # set4 = problem3a(window, rg.Point(point1.x, point1.y + 180), 9)
+    shift = 0
+    total_count = 0
+    number_of_lines = 3
+    for _ in range(m):
+        lines = problem3a(window, rg.Point(point1.x, point1.y + shift), number_of_lines)
+        number_of_lines = number_of_lines + 2
+        shift = shift + 60
+        window.continue_on_mouse_click()
+        total_count = lines + total_count
+    window.close_on_mouse_click()
+    return total_count
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.

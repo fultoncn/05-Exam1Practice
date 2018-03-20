@@ -294,18 +294,6 @@ def problem0c(circle, n, window):
       :type n: int
       :type window: rg.RoseWindow
     """
-    window = rg.RoseWindow
-
-    circle.attach_to(window)
-    radius = circle.radius
-    center = rg.Point(circle.center.x+(2*radius), circle.center.y)
-    for k in range(n):
-        circle = rg.Circle(center, radius)
-        circle.attach_to(window)
-
-        center = rg.Point(center.x+(2*radius, center.y))
-    window.render()
-
     # ------------------------------------------------------------------
     # Done: 4. Implement and test this function.
     #          Tests have been written for you (above).
@@ -316,8 +304,17 @@ def problem0c(circle, n, window):
     ####################################################################
     # ------------------------------------------------------------------
 
+    circle.attach_to(window)
+    radius = circle.radius
+    center = rg.Point(circle.center.x+(2*radius), circle.center.y)
+    for k in range(n):
+        circle = rg.Circle(center, radius)
+        circle.attach_to(window)
+        center = rg.Point(center.x+(2*radius), center.y)
+    window.render(0.5)
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # ----------------------------------------------------------------------
+
 main()
