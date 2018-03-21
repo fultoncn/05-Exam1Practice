@@ -170,6 +170,7 @@ def problem3a(window, point, n):
     window.render()
     return count
 
+
 def run_test_problem3b():
     """ Tests the   problem3b   function. """
     # Test 1 is ALREADY DONE (here).
